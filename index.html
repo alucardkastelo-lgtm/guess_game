@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="mn">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Шоо Таах Тоглоом</title>
+    <style>
+      /* huudasnii haragdah css */
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center; /* text golluulna */
+        margin-top: 50px;
+        background-color: #f4f4f4;
+      }
+      /* shoo */
+      .dice {
+        font-size: 30px; /* hariu her tom haragdah*/
+        margin: 20px;
+      }
+      /* button */
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer; /* hover */
+        margin: 5px;
+      }
+      #result {
+        font-weight: bold;
+        font-size: 24px;
+        margin-top: 20px;
+      }
+      /* niiilber haruulah ungu */
+      .score {
+        color: #282525;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Шоо Таах Тоглоом</h1>
+    <p>Хоёр шооны нийлбэрийг таагаарай:</p>
+
+    <button onclick="play('less')">7-оос бага</button>
+    <button onclick="play('equal')">7</button>
+    <button onclick="play('more')">7-оос их</button>
+
+    <div class="dice">
+      <span id="die1"></span>
+      <span id="die2"></span>
+    </div>
+
+    <div id="result"></div>
+    <p class="score">Нийлбэр: <span id="sum"></span></p>
+
+    <script>
+      /**
+      tolgoomiin algorithm
+       */
+      function play(guess) {
+        // Math.random() random too ogno
+        // Math.floor ashiglaad 6 aar urjuuled 1 iig nembel 1-6 hoorond too garj irne
+        const d1 = Math.floor(Math.random() * 6) + 1;
+        const d2 = Math.floor(Math.random() * 6) + 1;
+        const sum = d1 + d2; // hoyr shoonii niilber
+
+        // display text
+        // getElementById gaar html deer duudaj ajiluulna
+        document.getElementById("die1").innerText = d1;
+        document.getElementById("die2").innerText = d2;
+        document.getElementById("sum").innerText = sum;
+
+        // 7 oos ih bolon baga baigaa esehiig shalgah function
+        let outcome = "";
+        if (sum < 7) {
+          outcome = "less";
+        } else if (sum === 7) {
+          outcome = "equal";
+        } else {
+          outcome = "more";
+        }
+
+        // result function oo duudaj ogj taasan too tentsuu baigaa esehiig shalgana
+        //
+        const resultDiv = document.getElementById("result");
+
+        if (guess === outcome) {
+          // herew zow taawal "bayr hurgie zow taalaa gej hewlene"
+          resultDiv.innerText = "Баяр хүргэе! Та зөв таалаа.";
+          //   nogoon ogotei text gargaj irne
+          resultDiv.style.color = "green";
+        } else {
+          // herew buruu baiwal "buruu taalaa gej hewlene"
+          resultDiv.innerText = "Буруу байна. Дахиад оролдоорой.";
+          //   ulaan ongotei text gargaj irne
+          resultDiv.style.color = "red";
+        }
+      }
+    </script>
+  </body>
+</html>
